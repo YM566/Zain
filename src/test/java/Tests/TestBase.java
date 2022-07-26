@@ -54,6 +54,18 @@ public class TestBase
 		{
 			System.out.println("Please Check Your Driver Path..");
 		}
+		
+		else if (browserName.equalsIgnoreCase("headless"))
+
+		{
+			
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, System.setProperty("phantomjs.binary.path", "C:\\Users\\Yousef Mohamed\\Desktop\\selenium course\\Udemy Content\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe"));
+			String [] PhantomJSArgs = {"--web-security=no","--ignore-ssl-errors=yes"};
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, PhantomJSArgs);
+			driver = new PhantomJSDriver() ;
+		}
+		
 
 	}
 	@AfterSuite
@@ -66,6 +78,7 @@ public class TestBase
 
 	// take screenshot when test case fail and add it in the Screenshot folder
 	@AfterMethod
+	
 	public void screenshotOnFailure(ITestResult result) 
 	{
 		if (result.getStatus() == ITestResult.FAILURE)
